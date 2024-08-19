@@ -14,7 +14,10 @@ type Props = {
   route: Route<string>;
   variant: 'uikit' | 'material';
   size: 'compact' | 'regular';
-  badge?: string | number;
+  badge?:
+    | string
+    | number
+    | ((props: { style: StyleProp<ViewStyle> }) => React.ReactNode);
   badgeStyle?: StyleProp<TextStyle>;
   activeOpacity: number;
   inactiveOpacity: number;
@@ -96,13 +99,19 @@ export function TabBarIcon({
           color: inactiveTintColor,
         })}
       </View>
-      <Badge
-        visible={badge != null}
-        style={[styles.badge, badgeStyle]}
-        size={iconSize * 0.75}
-      >
-        {badge}
-      </Badge>
+      {typeof badge === 'function' ? (
+        badge({
+          style: styles.badge,
+        })
+      ) : (
+        <Badge
+          visible={badge != null}
+          style={[styles.badge, badgeStyle]}
+          size={iconSize * 0.75}
+        >
+          {badge}
+        </Badge>
+      )}
     </View>
   );
 }

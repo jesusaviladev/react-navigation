@@ -57,8 +57,12 @@ type Props = {
   }) => React.ReactNode;
   /**
    * Text to show in a badge on the tab icon.
+   * Also accepts a function to render a custom badge
    */
-  badge?: number | string;
+  badge?:
+    | number
+    | string
+    | ((props: { style: StyleProp<ViewStyle> }) => React.ReactNode);
   /**
    * Custom style for the badge.
    */

@@ -160,8 +160,12 @@ export type BottomTabNavigationOptions = HeaderOptions & {
 
   /**
    * Text to show in a badge on the tab icon.
+   * Also accepts a function to render a custom badge
    */
-  tabBarBadge?: number | string;
+  tabBarBadge?:
+    | number
+    | string
+    | ((props: { style: StyleProp<ViewStyle> }) => React.ReactNode);
 
   /**
    * Custom style for the tab bar badge.
